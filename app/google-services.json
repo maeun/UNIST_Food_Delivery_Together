@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "934854070556",
+    "firebase_url": "https://unist-food-delivery-together.firebaseio.com",
+    "project_id": "unist-food-delivery-together",
+    "storage_bucket": "unist-food-delivery-together.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934854070556:android:1fa94aa0ebb29f41",
+        "android_client_info": {
+          "package_name": "com.maeun.unist_food_delivery_together"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934854070556-hav5beei1m6jv9p5j2ni702rdamnetqd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maeun.unist_food_delivery_together",
+            "certificate_hash": "dbbdbec8494544bef68b02a27ea2406495411f51"
+          }
+        },
+        {
+          "client_id": "934854070556-0a5fse3aomv00033bb9stvd11da2o31s.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "934854070556-0a5fse3aomv00033bb9stvd11da2o31s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4v7DblMQ9ImMWDQ8ub348-V5yNTagrO4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934854070556-0a5fse3aomv00033bb9stvd11da2o31s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
