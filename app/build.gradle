@@ -28,7 +28,10 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.google.firebase:firebase-core:16.0.0'
+    //firebase-core와 firebase-database의 버전이 동일해야한다
+    //그렇지 않으면, No virtual method zzbsu()Z in class Lcom/google/firebase/FirebaseApp 이런 식의 에러가 발생
+    //ㅅㅂ 얘 때문에 개고생함 ㅅㅂ
+    implementation 'com.google.firebase:firebase-core:12.0.1'
     implementation 'com.google.firebase:firebase-database:12.0.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
