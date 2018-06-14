@@ -1,7 +1,9 @@
 package com.maeun.unist_food_delivery_together
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_write.*
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat
@@ -28,7 +30,9 @@ class WriteActivity : AppCompatActivity() {
             users.put("time", getTime)
             databasereference.child("party").push().setValue(users)
 
-
+            Toast.makeText(applicationContext,"등록되었습니다",Toast.LENGTH_SHORT).show()
+            finish()
+            startActivity(Intent(applicationContext, MainActivity::class.java))
         }
     }
 }

@@ -1,12 +1,15 @@
 package com.maeun.unist_food_delivery_together
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import android.widget.Toast
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var partyItem: ArrayList<PartyItem>
     lateinit var partyAdapter: PartyAdapter
@@ -39,8 +42,35 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        partyAdapter = PartyAdapter(partyItem)
+        partyAdapter = PartyAdapter(partyItem, this)
+        //setOnItemClickListener(this)를 해주려면, Adapter 부분에 함수 추가하는 것도 중요하지만,
+        //그 후에 Class MainActivity에 View.OnClickListener를 추가해주는 것도 중요
+        //그렇지 않으면 this랑 override fun onClick에서 override에 에러 발생
+        partyAdapter.setOnItemClickListener(this)
         main_rv.layoutManager = LinearLayoutManager(this)
         main_rv.adapter = partyAdapter
+
+        main_write_btn.setOnClickListener{
+            startActivity(Intent(applicationContext, WriteActivity::class.java))
+        }
+    }
+
+    override fun onClick(v: View?) {
+        Toast.makeText(applicationContext,"클릭",Toast.LENGTH_SHORT).show()
+
+        val idx : Int = main_rv.getChildAdapterPosition(v)
+
+        val category : String? = partyItem[idx].category
+        val restaurant : String? = partyItem[idx].restaurant
+        val writer : String? = partyItem[idx].writer
+        val time : String? = partyItem[idx].time
+
+        val intent = Intent(applicationContext, DetailActivity::class.java)
+        intent.putExtra("category", category)
+        intent.putExtra("restaurant", restaurant)
+        intent.putExtra("writer", writer)
+        intent.putExtra("time", time)
+
+        startActivity(intent)
     }
 }
