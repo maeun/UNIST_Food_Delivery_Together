@@ -10,8 +10,8 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        intent.getStringExtra("category")
-        intent.getStringExtra("restaurant")
+        detail_category_tv.setText(intent.getStringExtra("category"))
+        detail_restaurant_tv.setText(intent.getStringExtra("restaurant"))
         detail_writer_tv.setText(intent.getStringExtra("writer"))
         detail_time_tv.setText(intent.getStringExtra("time"))
     }

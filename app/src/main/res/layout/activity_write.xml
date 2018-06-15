@@ -8,6 +8,7 @@
     tools:context=".WriteActivity">
 
     <Spinner
+        android:id="@+id/write_category_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
