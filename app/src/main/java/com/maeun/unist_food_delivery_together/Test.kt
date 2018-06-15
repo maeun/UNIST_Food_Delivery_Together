@@ -44,9 +44,6 @@ class Test : AppCompatActivity() {
             }
         })
 
-
-
-
         databasereference.child("restaurant").addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -58,6 +55,13 @@ class Test : AppCompatActivity() {
                 var jsonObject = JSONObject(dataSnapshot.getValue().toString())
 
                 Log.d("aaa", jsonObject.toString())
+                Log.d("aaa", jsonObject.keys().toString())
+
+                var i : Iterator<String> = jsonObject.keys()
+                while(i.hasNext()){
+                    var b : String = i.next().toString()
+                    Log.d("aaa", b)
+                }
             }
         })
 
