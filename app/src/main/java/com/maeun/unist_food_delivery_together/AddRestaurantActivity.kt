@@ -11,6 +11,8 @@ import android.os.Bundle
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import java.io.ByteArrayOutputStream
@@ -18,6 +20,7 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.io.InputStream
 import kotlinx.android.synthetic.main.activity_add_restaurant.*
+import java.text.SimpleDateFormat
 import java.util.HashMap
 
 class AddRestaurantActivity : AppCompatActivity() {
@@ -92,13 +95,22 @@ class AddRestaurantActivity : AppCompatActivity() {
 
         users.put("category", add_restaurant_category_edit.getText().toString())
         users.put("restaurant", add_restaurant_restaurant_edit.getText().toString())
-        users.put("menu", add_restaurant_menu_iv.toString())
 
         databasereference.child("restaurant").child(add_restaurant_category_edit.getText().toString()).push().setValue(users)
 
+
+        val storage = FirebaseStorage.getInstance().getReference()
+        //val filename : String = add_restaurant_restaurant_edit.getText().toString() + "_menu"
+        val storageRef: StorageReference = storage.child("menu").child(add_restaurant_category_edit.getText().toString() + "/" + add_restaurant_restaurant_edit.getText().toString())
+        storageRef.putFile(data)
+
         Toast.makeText(applicationContext, "등록되었습니다", Toast.LENGTH_SHORT).show()
         finish()
-        startActivity(Intent(applicationContext, MainActivity::class.java))
+        startActivity(Intent(applicationContext, MainActivity::
+        class.java))
+
     }
+
 }
+
 
