@@ -32,8 +32,10 @@ dependencies {
     //그렇지 않으면, No virtual method zzbsu()Z in class Lcom/google/firebase/FirebaseApp 이런 식의 에러가 발생
     //ㅅㅂ 얘 때문에 개고생함 ㅅㅂ
     implementation 'com.google.firebase:firebase-core:15.0.0'
+    implementation 'com.google.firebase:firebase-auth:15.0.0'
     implementation 'com.google.firebase:firebase-database:15.0.0'
     implementation 'com.google.firebase:firebase-storage:15.0.0'
+    implementation 'com.firebaseui:firebase-ui-storage:0.6.0'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.squareup.retrofit2:retrofit:2.1.0'
     implementation 'junit:junit:4.12'

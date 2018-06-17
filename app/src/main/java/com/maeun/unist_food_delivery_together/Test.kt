@@ -1,13 +1,31 @@
 package com.maeun.unist_food_delivery_together
 
+import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.bumptech.glide.Glide
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.activity_test.*
 import org.json.JSONObject
+import android.support.annotation.NonNull
+import com.google.android.gms.tasks.OnFailureListener
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.widget.Toast
+import com.google.firebase.storage.StorageMetadata
+import com.google.android.gms.tasks.OnSuccessListener
+import android.graphics.Bitmap
+import android.net.Uri
+import com.firebase.ui.storage.images.FirebaseImageLoader
+import java.io.BufferedInputStream
+import java.net.URL
+
 
 class Test : AppCompatActivity() {
 
@@ -22,31 +40,33 @@ class Test : AppCompatActivity() {
 
         databasereference.child("restaurant").child("치킨").orderByChild("restaurant").equalTo("비버스치킨")
                 .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError?) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                        //Log.d("aaa",dataSnapshot.key) // 치킨
+                        //Log.d("aaa",dataSnapshot.getValue().toString()) //{-LEz4JPWNnHrNm6STn7n={restaurant=비버스치킨, category=치킨}}
+
+                    }
+                })
+
+        databasereference.child("restaurant").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                //Log.d("aaa",dataSnapshot.key) // 치킨
-                //Log.d("aaa",dataSnapshot.getValue().toString()) //{-LEz4JPWNnHrNm6STn7n={restaurant=비버스치킨, category=치킨}}
-
-            }
-        })
-
-        databasereference.child("restaurant").addListenerForSingleValueEvent(object : ValueEventListener{
-            override fun onCancelled(p0: DatabaseError?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 //Log.d("aaa",dataSnapshot.getValue().toString()) //{치킨={-LEz4ZYv1c1HGsIp7iWu={restaurant=교촌치킨, category=치킨}, -LEz4JPWNnHrNm6STn7n={restaurant=비버스치킨, category=치킨}}}
             }
         })
 
-        databasereference.child("restaurant").addListenerForSingleValueEvent(object : ValueEventListener{
+        databasereference.child("restaurant").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
+
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 var jsonObject = JSONObject(dataSnapshot.getValue().toString())
@@ -54,9 +74,9 @@ class Test : AppCompatActivity() {
                 //Log.d("aaa", jsonObject.toString()) //{"치킨":{"-LEz4ZYv1c1HGsIp7iWu":{"restaurant":"교촌치킨","category":"치킨"},"-LEz4JPWNnHrNm6STn7n":{"restaurant":"비버스치킨","category":"치킨"}}}
                 //Log.d("aaa", jsonObject.keys().toString()) //java.util.LinkedHashMap$KeyIterator@f6e0bc0
 
-                var i : Iterator<String> = jsonObject.keys()
-                while(i.hasNext()){
-                    var category : String = i.next()
+                var i: Iterator<String> = jsonObject.keys()
+                while (i.hasNext()) {
+                    var category: String = i.next()
                     //Log.d("aaa", b) //치킨
                     //categorylist.add(category)
                     //2nd
@@ -68,15 +88,6 @@ class Test : AppCompatActivity() {
         })
         //1st
         //Log.d("aaa", categorylist.toString())
-
-
-
-
-
-
-
-
-
 
 
         databasereference.child("restaurant").child("치킨").orderByChild("restaurant").equalTo("비버스치킨")
@@ -94,10 +105,11 @@ class Test : AppCompatActivity() {
                 })
 
 
-        databasereference.child("restaurant").child("치킨").addListenerForSingleValueEvent(object : ValueEventListener{
+        databasereference.child("restaurant").child("치킨").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError?) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
+
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 var jsonObject = JSONObject(dataSnapshot.getValue().toString())
@@ -105,17 +117,18 @@ class Test : AppCompatActivity() {
                 //Log.d("aaa", jsonObject.toString()) //{"치킨":{"-LEz4ZYv1c1HGsIp7iWu":{"restaurant":"교촌치킨","category":"치킨"},"-LEz4JPWNnHrNm6STn7n":{"restaurant":"비버스치킨","category":"치킨"}}}
                 //Log.d("aaa", jsonObject.keys().toString()) //java.util.LinkedHashMap$KeyIterator@f6e0bc0
 
-                var i : Iterator<String> = jsonObject.keys()
-                while(i.hasNext()){
-                    var category : String = i.next()
+                var i: Iterator<String> = jsonObject.keys()
+                while (i.hasNext()) {
+                    var category: String = i.next()
                     //Log.d("aaa", b) //치킨
                     categorylist.add(category)
-                    Log.d("bbb",category)
+                    Log.d("bbb", category)
 
-                    databasereference.child("restaurant").child("치킨").child(category).addListenerForSingleValueEvent(object : ValueEventListener{
+                    databasereference.child("restaurant").child("치킨").child(category).addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onCancelled(p0: DatabaseError?) {
                             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                         }
+
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                             var jsonObject = JSONObject(dataSnapshot.getValue().toString())
@@ -123,13 +136,13 @@ class Test : AppCompatActivity() {
                             //Log.d("aaa", jsonObject.toString()) //{"치킨":{"-LEz4ZYv1c1HGsIp7iWu":{"restaurant":"교촌치킨","category":"치킨"},"-LEz4JPWNnHrNm6STn7n":{"restaurant":"비버스치킨","category":"치킨"}}}
                             //Log.d("aaa", jsonObject.keys().toString()) //java.util.LinkedHashMap$KeyIterator@f6e0bc0
 
-                            var i : Iterator<String> = jsonObject.keys()
+                            var i: Iterator<String> = jsonObject.keys()
                             var a = 0
-                            while(i.hasNext()){
-                                var category : String = i.next()
+                            while (i.hasNext()) {
+                                var category: String = i.next()
                                 //Log.d("aaa", b) //치킨
-                                if(category == "restaurant"){
-                                    Log.d("aaa",jsonObject.getString(category))
+                                if (category == "restaurant") {
+                                    Log.d("aaa", jsonObject.getString(category))
                                 }
 //                                categorylista.add(category)
 //                                Log.d("aaa", "start2")
@@ -148,21 +161,49 @@ class Test : AppCompatActivity() {
 
             }
         })
+        val storage = FirebaseStorage.getInstance().getReference()
+        val storageRef: StorageReference = storage.child("menu").child("치킨").child("테스트치킨")
+
+//        val storage = FirebaseStorage.getInstance()
+//        val storageRef: StorageReference = storage.getReferenceFromUrl("gs://unist-food-delivery-together.appspot.com")
+//                .child("menu").child("치킨").child("테스트치킨")
 
 
+//
+//        Glide.with(this /* context */)
+//                .load(storageRef.downloadUrl.getResult().toString())
+//                .into(test_iv)
 
 
+        val ONE_MEGABYTE = (1024 * 1024).toLong()
+
+        //download file as a byte array
+        storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
+            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+            test_iv.setImageBitmap(bitmap)
+        }
 
 
+//        Glide.with(applicationContext)
+//                //FirebaseImageLoader()을 사용하기 위해서는 gradle에 implementation 'com.firebaseui:firebase-ui-storage:0.6.0'을 추가해야 함
+//                .using(FirebaseImageLoader())
+//                .load(storageRef)
+//                .into(test_iv)
 
+        test_iv.setOnClickListener {
+            Toast.makeText(applicationContext, storageRef.toString(), Toast.LENGTH_SHORT).show()
+        }
 
-
-
-
-
-
-
-
-
+//        storageRef.metadata
+//                .addOnSuccessListener { storageMetadata ->
+//
+//                    Toast.makeText(applicationContext, "성공", Toast.LENGTH_SHORT).show()
+//
+//
+//
+//                }
+//                .addOnFailureListener {
+//                    Toast.makeText(applicationContext, "실패", Toast.LENGTH_SHORT).show()
+//                }
     }
 }

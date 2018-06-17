@@ -129,6 +129,8 @@ class WriteActivity : AppCompatActivity() {
             val getTime = sdf.format(time)
 
             val users = HashMap<String, String>()
+            users.put("category", write_category_spinner.selectedItem.toString())
+            users.put("restaurant", write_restaurant_spinner.selectedItem.toString())
             users.put("writer", "maeuniyee")
             users.put("content", write_content_edit.getText().toString())
             users.put("time", getTime)

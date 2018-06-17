@@ -112,5 +112,3 @@ class AddRestaurantActivity : AppCompatActivity() {
     }
 
 }
-
-
