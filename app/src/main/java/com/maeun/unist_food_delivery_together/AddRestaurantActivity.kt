@@ -95,6 +95,7 @@ class AddRestaurantActivity : AppCompatActivity() {
 
         users.put("category", add_restaurant_category_edit.getText().toString())
         users.put("restaurant", add_restaurant_restaurant_edit.getText().toString())
+        users.put("contact", add_restaurant_contact_edit.getText().toString())
 
         databasereference.child("restaurant").child(add_restaurant_category_edit.getText().toString()).push().setValue(users)
 
