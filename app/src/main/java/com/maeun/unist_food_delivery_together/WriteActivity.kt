@@ -39,19 +39,19 @@ class WriteActivity : AppCompatActivity() {
 
         databasereference.child("restaurant").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                var jsonObject = JSONObject(dataSnapshot.getValue().toString())
-
-                var i: Iterator<String> = jsonObject.keys()
-                while (i.hasNext()) {
-                    var category: String = i.next()
-                    categorylist.add(category)
-                    Log.d("aaa", category)
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
+
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    var jsonObject = JSONObject(dataSnapshot.getValue().toString())
+
+                    var i: Iterator<String> = jsonObject.keys()
+                    while (i.hasNext()) {
+                        var category: String = i.next()
+                        categorylist.add(category)
+                        Log.d("aaa", category)
+                    }
 
                 write_category_spinner.adapter = categorylist_adapter
 
