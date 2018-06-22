@@ -38,112 +38,208 @@ class Test : AppCompatActivity() {
 
         val databasereference = FirebaseDatabase.getInstance().getReference()
 
+//        databasereference.child("restaurant").addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onCancelled(p0: DatabaseError?) {
+//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//            }
+//
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//
+//                var jsonObject = JSONObject(dataSnapshot.getValue().toString())
+//
+//                var i: Iterator<String> = jsonObject.keys()
+//                while (i.hasNext()) {
+//                    var category: String = i.next()
+//                    Log.d("aaa", category)
+//                }
+//            }
+//        })
+
+
+
         databasereference.child("restaurant").child("치킨").orderByChild("restaurant").equalTo("비버스치킨")
-                .addListenerForSingleValueEvent(object : ValueEventListener {
+                .addListenerForSingleValueEvent(object : ValueEventListener{
                     override fun onCancelled(p0: DatabaseError?) {
                         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
 
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        Log.d("aaaaa", dataSnapshot.toString())
+                        Log.d("aaaaa",dataSnapshot.getValue().toString())
+                        var jsonObject = JSONObject(dataSnapshot.getValue().toString())
+
+
+
+                        Log.d("aaaaa", jsonObject.toString())
+
+                        Log.d("aaaaa",jsonObject.keys().toString())
+
+                        var i: Iterator<String> = jsonObject.keys()
+
+                        while (i.hasNext()) {
+                            var key: String = i.next()
+
+                        databasereference.child("restaurant").child("치킨").child(key)
+                                .addListenerForSingleValueEvent(object : ValueEventListener{
+                                    override fun onCancelled(p0: DatabaseError?) {
+                                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                                    }
+                                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                                        var jsonObject_ = JSONObject(dataSnapshot.getValue().toString())
+
+                                        var i_: Iterator<String> = jsonObject_.keys()
+                                        while (i_.hasNext()) {
+                                            var key_: String = i_.next()
+                                            Log.d("aaaaa", key_)
+
+                                            if (key_ == "contact") {
+                                                Log.d("aaaaa", jsonObject_.getString(key_))
+                                            }
+                                        }
+                                    }
+
+                                })
+
+
+                    }
+
+                }})
+
+        databasereference.child("restaurant").child("치킨").orderByChild("restaurant").equalTo("비버스치킨")
+                .addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onCancelled(p0: DatabaseError?) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                        Log.d("aaaaa", dataSnapshot.toString())
+//                        Log.d("aaaaa",dataSnapshot.getValue().toString())
+                        var jsonObejct = JSONObject(dataSnapshot.getValue().toString())
+                    }
+
+                })
+
+        databasereference.child("restaurant").child("치킨").child("테스트치킨")
+                .addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onCancelled(p0: DatabaseError?) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                        Log.d("aaaaa", dataSnapshot.toString())
+//                        Log.d("aaaaa",dataSnapshot.getValue().toString())
+//                        var jsonObejct = JSONObject(dataSnapshot.getValue().toString())
+                    }
+
+                })
+
+//        databasereference.child("restaurant").child("치킨").orderByChild("restaurant").equalTo("비버스치킨")
+//                .addListenerForSingleValueEvent(object : ValueEventListener {
+//                    override fun onCancelled(p0: DatabaseError?) {
+//                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//                    }
+
+//                    override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                         //Log.d("aaa",dataSnapshot.key) // 치킨
                         //Log.d("aaa",dataSnapshot.getValue().toString()) //{-LEz4JPWNnHrNm6STn7n={restaurant=비버스치킨, category=치킨}}
 
-                    }
-                })
+//                    }
+//                })
 
-        databasereference.child("restaurant").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
+//        databasereference.child("restaurant").addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onCancelled(p0: DatabaseError?) {
+//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//            }
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
                 //Log.d("aaa",dataSnapshot.getValue().toString()) //{치킨={-LEz4ZYv1c1HGsIp7iWu={restaurant=교촌치킨, category=치킨}, -LEz4JPWNnHrNm6STn7n={restaurant=비버스치킨, category=치킨}}}
-            }
-        })
+//            }
+//        })
 
-        databasereference.child("restaurant").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
+//        databasereference.child("restaurant").addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onCancelled(p0: DatabaseError?) {
+//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//            }
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                var jsonObject = JSONObject(dataSnapshot.getValue().toString())
+//                var jsonObject = JSONObject(dataSnapshot.getValue().toString())
 
                 //Log.d("aaa", jsonObject.toString()) //{"치킨":{"-LEz4ZYv1c1HGsIp7iWu":{"restaurant":"교촌치킨","category":"치킨"},"-LEz4JPWNnHrNm6STn7n":{"restaurant":"비버스치킨","category":"치킨"}}}
                 //Log.d("aaa", jsonObject.keys().toString()) //java.util.LinkedHashMap$KeyIterator@f6e0bc0
 
-                var i: Iterator<String> = jsonObject.keys()
-                while (i.hasNext()) {
-                    var category: String = i.next()
+//                var i: Iterator<String> = jsonObject.keys()
+//                while (i.hasNext()) {
+//                    var category: String = i.next()
                     //Log.d("aaa", b) //치킨
                     //categorylist.add(category)
                     //2nd
                     //Log.d("aaa", categorylist.toString())
-                }
+//                }
                 //3rd
                 //Log.d("aaa", categorylist.toString())
-            }
-        })
+//            }
+//        })
         //1st
         //Log.d("aaa", categorylist.toString())
 
 
-        databasereference.child("restaurant").child("치킨").orderByChild("restaurant").equalTo("비버스치킨")
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError?) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                    }
+//        databasereference.child("restaurant").child("치킨").orderByChild("restaurant").equalTo("비버스치킨")
+//                .addListenerForSingleValueEvent(object : ValueEventListener {
+//                    override fun onCancelled(p0: DatabaseError?) {
+//                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//                    }
 
-                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                    override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                         //Log.d("aaa",dataSnapshot.key) // 치킨
                         //Log.d("aaa",dataSnapshot.getValue().toString()) //{-LEz4JPWNnHrNm6STn7n={restaurant=비버스치킨, category=치킨}}
 
-                    }
-                })
+//                    }
+//                })
 
 
-        databasereference.child("restaurant").child("치킨").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
+//        databasereference.child("restaurant").child("치킨").addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onCancelled(p0: DatabaseError?) {
+//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//            }
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                var jsonObject = JSONObject(dataSnapshot.getValue().toString())
+//                var jsonObject = JSONObject(dataSnapshot.getValue().toString())
 
                 //Log.d("aaa", jsonObject.toString()) //{"치킨":{"-LEz4ZYv1c1HGsIp7iWu":{"restaurant":"교촌치킨","category":"치킨"},"-LEz4JPWNnHrNm6STn7n":{"restaurant":"비버스치킨","category":"치킨"}}}
                 //Log.d("aaa", jsonObject.keys().toString()) //java.util.LinkedHashMap$KeyIterator@f6e0bc0
 
-                var i: Iterator<String> = jsonObject.keys()
-                while (i.hasNext()) {
-                    var category: String = i.next()
+//                var i: Iterator<String> = jsonObject.keys()
+//                while (i.hasNext()) {
+//                    var category: String = i.next()
                     //Log.d("aaa", b) //치킨
-                    categorylist.add(category)
-                    Log.d("bbb", category)
+//                    categorylist.add(category)
+//                    Log.d("bbb", category)
 
-                    databasereference.child("restaurant").child("치킨").child(category).addListenerForSingleValueEvent(object : ValueEventListener {
-                        override fun onCancelled(p0: DatabaseError?) {
-                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                        }
+//                    databasereference.child("restaurant").child("치킨").child(category).addListenerForSingleValueEvent(object : ValueEventListener {
+//                        override fun onCancelled(p0: DatabaseError?) {
+//                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//                        }
 
-                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                        override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                            var jsonObject = JSONObject(dataSnapshot.getValue().toString())
+//                            var jsonObject = JSONObject(dataSnapshot.getValue().toString())
 
                             //Log.d("aaa", jsonObject.toString()) //{"치킨":{"-LEz4ZYv1c1HGsIp7iWu":{"restaurant":"교촌치킨","category":"치킨"},"-LEz4JPWNnHrNm6STn7n":{"restaurant":"비버스치킨","category":"치킨"}}}
                             //Log.d("aaa", jsonObject.keys().toString()) //java.util.LinkedHashMap$KeyIterator@f6e0bc0
 
-                            var i: Iterator<String> = jsonObject.keys()
-                            var a = 0
-                            while (i.hasNext()) {
-                                var category: String = i.next()
+//                            var i: Iterator<String> = jsonObject.keys()
+//                            var a = 0
+//                            while (i.hasNext()) {
+//                                var category: String = i.next()
                                 //Log.d("aaa", b) //치킨
-                                if (category == "restaurant") {
-                                    Log.d("aaa", jsonObject.getString(category))
-                                }
+//                                if (category == "restaurant") {
+//                                    Log.d("aaa", jsonObject.getString(category))
+//                                }
 //                                categorylista.add(category)
 //                                Log.d("aaa", "start2")
 //                                Log.d("aaa", categorylista.toString())
@@ -153,16 +249,16 @@ class Test : AppCompatActivity() {
                             }
 
                         }
-                    })
+//                    })
 //                    Log.d("aaa", "start1")
 //                    Log.d("aaa", categorylist.toString())
 
-                }
+//                }
 
-            }
-        })
-        val storage = FirebaseStorage.getInstance().getReference()
-        val storageRef: StorageReference = storage.child("menu").child("치킨").child("테스트치킨")
+//            }
+//        })
+//        val storage = FirebaseStorage.getInstance().getReference()
+//        val storageRef: StorageReference = storage.child("menu").child("치킨").child("테스트치킨")
 
 //        val storage = FirebaseStorage.getInstance()
 //        val storageRef: StorageReference = storage.getReferenceFromUrl("gs://unist-food-delivery-together.appspot.com")
@@ -175,13 +271,7 @@ class Test : AppCompatActivity() {
 //                .into(test_iv)
 
 
-        val ONE_MEGABYTE = (1024 * 1024).toLong()
-
-        //download file as a byte array
-        storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener { bytes ->
-            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-            test_iv.setImageBitmap(bitmap)
-        }
+//
 
 
 //        Glide.with(applicationContext)
@@ -190,9 +280,9 @@ class Test : AppCompatActivity() {
 //                .load(storageRef)
 //                .into(test_iv)
 
-        test_iv.setOnClickListener {
-            Toast.makeText(applicationContext, storageRef.toString(), Toast.LENGTH_SHORT).show()
-        }
+//        test_iv.setOnClickListener {
+//            Toast.makeText(applicationContext, storageRef.toString(), Toast.LENGTH_SHORT).show()
+//        }
 
 //        storageRef.metadata
 //                .addOnSuccessListener { storageMetadata ->
@@ -205,5 +295,5 @@ class Test : AppCompatActivity() {
 //                .addOnFailureListener {
 //                    Toast.makeText(applicationContext, "실패", Toast.LENGTH_SHORT).show()
 //                }
-    }
-}
+//    }
+//}
