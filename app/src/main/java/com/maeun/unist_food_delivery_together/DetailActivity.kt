@@ -41,29 +41,31 @@ class DetailActivity : AppCompatActivity() {
 
         val databasereference = FirebaseDatabase.getInstance().getReference()
 
-        databasereference.child("restaurant")
-        databasereference.child("restaurant").child(intent.getStringExtra("category"))
+        databasereference.child("restaurant").child(intent.getStringExtra("category")).orderByChild("restaurant").equalTo(intent.getStringExtra("restaurant"))
                 .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onCancelled(p0: DatabaseError?) {
                         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
 
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-
                         Log.d("aaaaa", dataSnapshot.toString())
                         Log.d("aaaaa", dataSnapshot.getValue().toString())
+                        var jsonObject = JSONObject(dataSnapshot.getValue().toString())
 
-//                        var jsonObject = JSONObject(dataSnapshot.getValue().toString())
+                        var i: Iterator<String> = jsonObject.keys()
+                        while (i.hasNext()) {
+                            var key: String = i.next()
 
-//                        var i: Iterator<String> = jsonObject.keys()
-//                        while (i.hasNext()) {
-//                            var key: String = i.next()
-//
-//                            if (key == "contact") {
-//                                detail_contact_tv.setText(jsonObject.getString(key))
-//                            }
-//                        }
+                            if (key == "contact") {
+                                Log.d("aaaaa", jsonObject.getString(key))
+                                detail_contact_tv.setText(jsonObject.getString(key))
+                            }
+                        }
                     }
+
+                })
+
+
 
 
 //        databasereference.child("restaurant").child(intent.getStringExtra("category")).child(intent.getStringExtra("restaurant"))
@@ -79,7 +81,6 @@ class DetailActivity : AppCompatActivity() {
 //                var contact: PartyItem? = dataSnapshot.getValue(PartyItem::class.java)
 //                contact = PartyItem(contact!!.contact)
 //                detail_contact_tv.setText(contact.toString())
-                })
+                }
 
     }
-}
