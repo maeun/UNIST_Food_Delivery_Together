@@ -56,6 +56,29 @@ class Test : AppCompatActivity() {
 //        })
 
 
+        databasereference.child("restaurant").child("치킨").child("test")
+                .addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onCancelled(p0: DatabaseError?) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+                    override fun onDataChange(dataSnapshot : DataSnapshot) {
+                        var jsonObject = JSONObject(dataSnapshot.getValue().toString())
+
+                        Log.d("test", jsonObject.toString())
+
+                        var i: Iterator<String> = jsonObject.keys()
+                        while (i.hasNext()) {
+                            var key: String = i.next()
+                            Log.d("test", key)
+
+                            if (key == "contact") {
+                                Log.d("test", jsonObject.getString(key))
+                            }
+                        }
+                    }
+
+                })
+
 
         databasereference.child("restaurant").child("치킨").orderByChild("restaurant").equalTo("비버스치킨")
                 .addListenerForSingleValueEvent(object : ValueEventListener{
