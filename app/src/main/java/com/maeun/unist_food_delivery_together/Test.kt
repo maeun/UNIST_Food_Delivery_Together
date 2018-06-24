@@ -64,15 +64,15 @@ class Test : AppCompatActivity() {
                     override fun onDataChange(dataSnapshot : DataSnapshot) {
                         var jsonObject = JSONObject(dataSnapshot.getValue().toString())
 
-                        Log.d("test", jsonObject.toString())
+//                        Log.d("test", jsonObject.toString()) //{"restaurant":"테스트치킨","contact":"052-1111-2222","category":"치킨"}
 
                         var i: Iterator<String> = jsonObject.keys()
                         while (i.hasNext()) {
                             var key: String = i.next()
-                            Log.d("test", key)
+//                            Log.d("test", key)
 
                             if (key == "contact") {
-                                Log.d("test", jsonObject.getString(key))
+//                                Log.d("test", jsonObject.getString(key))
                             }
                         }
                     }
@@ -87,15 +87,15 @@ class Test : AppCompatActivity() {
                     }
 
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        Log.d("aaaaa", dataSnapshot.toString())
-                        Log.d("aaaaa",dataSnapshot.getValue().toString())
+                        Log.d("aaaaa", dataSnapshot.toString()) //{ key = 치킨, value = {-LEz4JPWNnHrNm6STn7n={restaurant=비버스치킨, contact=052-1111-1111, category=치킨}} }
+                        Log.d("aaaaa",dataSnapshot.getValue().toString()) //{-LEz4JPWNnHrNm6STn7n={restaurant=비버스치킨, contact=052-1111-1111, category=치킨}}
                         var jsonObject = JSONObject(dataSnapshot.getValue().toString())
 
 
 
-                        Log.d("aaaaa", jsonObject.toString())
+                        Log.d("aaaaa", jsonObject.toString()) //{"-LEz4JPWNnHrNm6STn7n":{"restaurant":"비버스치킨","contact":"052-1111-1111","category":"치킨"}}
 
-                        Log.d("aaaaa",jsonObject.keys().toString())
+                        Log.d("aaaaa",jsonObject.keys().toString()) //java.util.LinkedHashMap$KeyIterator@8b29de8
 
                         var i: Iterator<String> = jsonObject.keys()
 
